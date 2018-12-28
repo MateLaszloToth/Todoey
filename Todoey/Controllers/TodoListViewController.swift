@@ -64,12 +64,14 @@ class TodoListViewController: UITableViewController {
             self.itemArray.append(newItem)
             self.saveItems()
         }
-        
+        let cancel = UIAlertAction(title: "Cancel", style: .default) { (_) in
+        }
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Create new item"
             textField = alertTextField
         }
         
+        alert.addAction(cancel)
         alert.addAction(action)
         present(alert,animated: true, completion: nil)
     }
