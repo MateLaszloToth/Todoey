@@ -44,6 +44,34 @@ class CategoryTableViewController: UITableViewController {
         }
     }
     
+    //MARK: - Add New Categories
+
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        var textField = UITextField()
+        let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Create new category"
+            textField = alertTextField
+        }
+        
+        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+            
+            let category = Category(context: self.context)
+            category.name = textField.text!
+            self.categoryArray.append(category)
+            self.saveCategories()
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .default) { (_) in
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(action)
+        
+        present(alert, animated: true)
+    }
+    
     //MARK: - Data Manipulation Methods
     
     func saveCategories(){
@@ -66,34 +94,6 @@ class CategoryTableViewController: UITableViewController {
         }
         tableView.reloadData()
     }
-    
-    //MARK: - Add New Categories
-
-    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
-        var textField = UITextField()
-        let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
-        
-        alert.addTextField { (alertTextField) in
-            alertTextField.placeholder = "Create new category"
-            textField = alertTextField
-        }
-        
-        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
-            
-            let category = Category(context: self.context)
-            category.name = textField.text!
-            self.categoryArray.append(category)
-            self.saveCategories()
-        }
-        let cancel = UIAlertAction(title: "Cancel", style: .default) { (_) in
-        }
-        
-        alert.addAction(cancel)
-        alert.addAction(action)
-        
-        present(alert, animated: true)
-    }
-    
     
     
 }
